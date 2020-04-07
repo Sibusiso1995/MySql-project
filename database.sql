@@ -1,13 +1,11 @@
--- Creating Database
-
+-- Part 1: Creating a database
+--  Creating Database
 CREATE DATABASE Umuzi;
 
--- Use the Umuzi Database
-
+--  Use the Umuzi Database
 USE Umuzi;
 
--- Creating a Customers Table
-
+--  Customers Table
 CREATE TABLE Customers(
 customer_id INT NOT NULL AUTO_INCREMENT,
 first_name VARCHAR(50),
@@ -21,8 +19,7 @@ country VARCHAR(50),
 PRIMARY KEY(customer_id)
 );
 
--- Creating a Employees Table
-
+--  Employees Table
 CREATE TABLE Employees(
 employee_id INT NOT NULL AUTO_INCREMENT,
 first_name VARCHAR(50),
@@ -32,8 +29,7 @@ job_title VARCHAR(20),
 PRIMARY KEY(employee_id)
 );
 
--- Creating a Products Table
-
+--  Products Table
 CREATE TABLE Products(
 product_id INT NOT NULL AUTO_INCREMENT,
 product_name VARCHAR(100),
@@ -42,8 +38,7 @@ buy_price DECIMAL,
 PRIMARY KEY(product_id)
 );
 
--- Creating a Payments Table
-
+--  Payments Table
 CREATE TABLE Payments(
 payment_id INT NOT NULL AUTO_INCREMENT,
 customer_id INT ,
@@ -53,8 +48,7 @@ FOREIGN KEY(customer_id) REFERENCES Customers(customer_id) ON DELETE SET NULL,
 PRIMARY KEY(payment_id)
 );
 
--- Creating a Orders Table
-
+--  Orders Table
 CREATE TABLE Orders(
 order_id INT NOT NULL AUTO_INCREMENT ,
 product_id INT,
@@ -69,34 +63,29 @@ FOREIGN KEY(fullfilled_by_employee_id) REFERENCES Employees(employee_id) ON DELE
 PRIMARY KEY(order_id)
 );
 
--- Inserting Data into the Customers Table
-
+--  Inserting Data into the Customers Table
 INSERT INTO Customers(first_name,last_name ,gender ,address ,phone ,email ,city ,country) VALUES ('John','Hibert','Male','284 chaucer st',084789657,'john@gmail.com','Johannesburg','South Africa')	;
 INSERT INTO Customers(first_name,last_name ,gender ,address ,phone ,email ,city ,country) VALUES ('Thando','Sithole','Female','240 Sect 1',0794445584,'thando@gmail.com	','Cape Town','South Africa')	;
 INSERT INTO Customers(first_name,last_name ,gender ,address ,phone ,email ,city ,country) VALUES ('Leon','Glen','Male','81 Everton Rd,Gillits',0820832830,'Leon@gmail.com','Durban','South Africa')	;
 INSERT INTO Customers(first_name,last_name ,gender ,address ,phone ,email ,city ,country) VALUES ('Charl','Muller','Male','290A Dorset Ecke',+44856872553	,'Charl.muller@yahoo.com','Berlin','Germany')	;
 INSERT INTO Customers(first_name,last_name ,gender ,address ,phone ,email ,city ,country) VALUES ('Julia','Stein','Female','2 Wernerring',+448672445058	,'Js234@yahoo.com','Frankfurt','Germany')	;
 
--- Inserting Data into the Employees Table
-
+--  Inserting Data into the Employees Table
 INSERT INTO Employees(first_name,last_name ,email ,job_title) VALUES ('Kani','Matthew','mat@gmail.com','Manager')	;
 INSERT INTO Employees(first_name,last_name ,email ,job_title) VALUES ('Lesly','Cronje','LesC@gmail.com','Clerk')	;
 INSERT INTO Employees(first_name,last_name ,email ,job_title) VALUES ('Gideon','Maduku','m@gmail.com','Accountant')	;
 
--- Inserting Data into the Products Table
-
+--  Inserting Data into the Products Table
 INSERT INTO Products(product_name,description ,buy_price) VALUES ('Harley Davidson Chopper','This replica features working kickstand, front suspension, gear-shift lever',150.75);
 INSERT INTO Products(product_name,description ,buy_price) VALUES ('Classic Car','Turnable front wheels, steering function',550.75)	;
 INSERT INTO Products(product_name,description ,buy_price) VALUES ('Sports car','Turnable front wheels, steering function',700.60)	;
 
--- Inserting Data into the Payments Table
-
+--  Inserting Data into the Payments Table
 INSERT INTO Payments(customer_id,payment_date ,amount) VALUES (1,'2018-09-01',150.75)	;
 INSERT INTO Payments(customer_id,payment_date ,amount) VALUES (5,'2018-09-03',150.75)	;
 INSERT INTO Payments(customer_id,payment_date ,amount) VALUES (4,'2018-09-03',700.60)	;
 
--- Inserting Data into the Orders Table
-
+--  Inserting Data into the Orders Table
 INSERT INTO Orders(product_id,payment_id ,fullfilled_by_employee_id,date_required,status) VALUES (1,1,2,'2018-09-05','Not shipped');
 INSERT INTO Orders(product_id,payment_id ,fullfilled_by_employee_id,date_required,date_shipped,status) VALUES (1,2,2,'2018-09-04','2018-09-03','Shipped');
 INSERT INTO Orders(product_id,payment_id ,fullfilled_by_employee_id,date_required,status) VALUES (3,3,3,'2018-09-06','Not shipped');
@@ -104,7 +93,7 @@ INSERT INTO Orders(product_id,payment_id ,fullfilled_by_employee_id,date_require
 
 
 
--- PART 2
+-- Part 2: Querying a database
 
 -- 1.
 SELECT * FROM Customers;
@@ -160,6 +149,3 @@ INNER JOIN Customers ON Payments.customer_id = Customers.customer_id;
 -- 17.
 SELECT * FROM Products WHERE description LIKE '%turnable front wheels%'
 
-/*Return the average price of all Products, in Rands and in Dollars (assume the exchange rate is R12 to the Dollar).
-Using INNER JOIN create a query that selects all Payments with Customer information.
-Select all products that have turnable front wheels.*/
